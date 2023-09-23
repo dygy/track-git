@@ -1,9 +1,13 @@
 import { gitExec } from "./git";
 
+type ArgumentTypes<F extends Function> = F extends (...args: infer A) => any ? A : never;
+type ArrayElement<ArrayType extends readonly unknown[]> =
+    ArrayType extends readonly (infer ElementType)[] ? ElementType : never;
+type TrackerArguments = ArgumentTypes<typeof getTroughGroup>;
 type ResultObject = Record<
-  string,
+    ArrayElement<TrackerArguments[1]>,
   Record<
-    string,
+      ArrayElement<TrackerArguments[0]> | "global",
     {
       added: number;
       removed: number;
@@ -11,12 +15,14 @@ type ResultObject = Record<
     }
   >
 >;
-const regex = /(\d+)\s+(\d+)\s+([a-zA-Z\/.\-{}_]+)/gm;
+
 const enum Groups {
   ADDED = 1,
   REMOVED = 2,
   WHERE = 3,
 }
+
+const regex = /(\d+)\s+(\d+)\s+([a-zA-Z\/.\-{}_]+)/gm;
 
 export const getTroughGroup = async (pathes: string[], authors: string[]) => {
   const result: ResultObject = {};
