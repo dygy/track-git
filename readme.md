@@ -1,3 +1,8 @@
+## Collect info about authours in your repositories.
+### How much lines they added
+### How much deleted
+### Where
+
 at first install deps
 
 ```bash 
