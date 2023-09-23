@@ -14,3 +14,8 @@ then you need to form and comand like
 ```bash 
   npm run start "absolutePathToGitRepo1,absolutePathToGitRepo2", "name1 surname1,name2 surname2"
 ```
+you also can use .env file in origin
+```.env
+    projects = "absolutePathToGitRepo1,absolutePathToGitRepo2"
+    authors = "name1 surname1,name2 surname2"
+```
